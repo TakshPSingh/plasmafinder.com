@@ -52,6 +52,21 @@ const DonorSchema = new mongoose.Schema({
             max: +180
         }
     },
+    verified: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    numberOfTimesOTPSent: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    otp: {
+        type: Number,
+        min: 0,
+        max: 999999
+    },
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at'
