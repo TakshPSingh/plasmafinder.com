@@ -4,7 +4,9 @@
   "description": "A service to match COVID-19 patient with plasma donors",
   "main": "server/app.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon server/server.js",
+    "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
   },
   "author": "TakshPSingh",
   "license": "UNLICENSED",
