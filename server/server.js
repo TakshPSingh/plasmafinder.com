@@ -1,5 +1,5 @@
-var {app} = require('./app')
-var {mongoose} = require('../db/mongoose-connect')
+const {app} = require('./app')
+const {mongoose} = require('../db/mongoose-connect')
 
 const port = process.env.PORT
 
