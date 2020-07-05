@@ -58,11 +58,4 @@ const UnverifiedDonorSchema = new mongoose.Schema({
     }
 })
 
-UnverifiedDonor.statics.create = async function (donor) {
-    var UnverifiedDonor = this
-
-    var potentialDonor = new UnverifiedDonor(donor)
-    return potentialDonor.save()
-}
-
 export const UnverifiedDonor = mongoose.model('UnverifiedDonor', UnverifiedDonorSchema)
