@@ -60,6 +60,9 @@ const PatientSchema = new mongoose.Schema({
         type: Number,
         min: 0,
         max: 999999
+    },
+    verificationAttemptedWithCurrentOTP: {
+        type: Boolean
     }
 },
     {

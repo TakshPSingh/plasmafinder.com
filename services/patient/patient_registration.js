@@ -1,9 +1,8 @@
 const {Patient} = require('../../models/patient')
 
-const {patientRegistrationEnums} = require('../../enums/patient_registration')
+const {generateAndSendOTP} = require('../common/generate_and_send_otp')
 
-const {generateOTP} = require('../../services/common/generate_otp')
-const {sendOTP} = require('../../services/common/send_otp')
+const {patientRegistrationEnums} = require('../../enums/patient_registration')
 
 const registerPatient = async (patientInfo) => {
     var patient = new Patient(patientInfo)
@@ -14,13 +13,7 @@ const registerPatient = async (patientInfo) => {
     if (patientValidationError) {
         throw patientRegistrationEnums.VALIDATION_ERROR
     } else {
-        var otp = await generateOTP()
-
-        patient.otp = otp
-        patient.numberOfTimesOTPSent++
-        await patient.save()
-
-        await sendOTP(patient.phone, otp)
+        await generateAndSendOTP(patient)
     }
 }
 

@@ -2,8 +2,7 @@ const {Donor} = require('../../models/donor')
 
 const {donorRegistrationEnums} = require('../../enums/donor_registration')
 
-const {generateOTP} = require('../../services/common/generate_otp')
-const {sendOTP} = require('../../services/common/send_otp')
+const {generateAndSendOTP} = require('../common/generate_and_send_otp')
 
 const registerDonor = async (donorInfo) => {
     var donor = new Donor(donorInfo)
@@ -14,13 +13,7 @@ const registerDonor = async (donorInfo) => {
     if (donorValidationError || !donor.medicallyEligible) {
         throw donorRegistrationEnums.VALIDATION_ERROR
     } else {
-        var otp = await generateOTP()
-
-        donor.otp = otp
-        donor.numberOfTimesOTPSent++
-        await donor.save()
-
-        await sendOTP(donor.phone, otp)
+        await generateAndSendOTP(donor)
     }
 }
 
