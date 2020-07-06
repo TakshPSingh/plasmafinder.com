@@ -66,11 +66,19 @@ const DonorSchema = new mongoose.Schema({
         type: Number,
         min: 0,
         max: 999999
-    },
-    timestamps: {
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
     }
-})
+},
+    {
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at'
+        }
+    }
+)
+
+DonorSchema.statics.findByPhoneNumber = function (phone) {
+    var Donor = this
+    return Donor.findOne({ phone })
+}
 
 export const Donor = mongoose.model('Donor', DonorSchema)
