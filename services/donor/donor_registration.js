@@ -9,6 +9,7 @@ const registerDonor = async (donorInfo) => {
     
     donor.numberOfTimesDonated = 0
     donor.numberOfTimesOTPSent = 0
+    donor.available = false
     donor.verified = false
 
     var donorValidationError = donor.validateSync()

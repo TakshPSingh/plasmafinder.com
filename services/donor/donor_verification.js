@@ -20,6 +20,7 @@ const handleVerificationCaseWhenOTPIncorrect = async (donor, phone, otp) => {
 const handleCaseWhenOTPCorrectInFirstAttempt = async (donor) => {
     donor.verificationAttemptedWithCurrentOTP = true
     donor.verified = true
+    donor.available = true
     await donor.save()
 }
 

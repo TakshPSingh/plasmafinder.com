@@ -75,6 +75,11 @@ const DonorSchema = new mongoose.Schema({
         required: true,
         min: 0,
         default: 0
+    },
+    available: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 },
     {
