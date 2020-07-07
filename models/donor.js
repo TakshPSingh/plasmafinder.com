@@ -80,6 +80,9 @@ const DonorSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    patientId: {
+        type: mongoose.Types.ObjectId
     }
 },
     {

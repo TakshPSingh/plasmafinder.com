@@ -9,6 +9,8 @@ const registerPatient = async (patientInfo) => {
     patient.numberOfTimesOTPSent = 0
     patient.verified = false
 
+    delete patient.donorId
+
     var patientValidationError = patient.validateSync()
     if (patientValidationError) {
         throw patientRegistrationEnums.VALIDATION_ERROR

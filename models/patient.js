@@ -63,6 +63,9 @@ const PatientSchema = new mongoose.Schema({
     },
     verificationAttemptedWithCurrentOTP: {
         type: Boolean
+    },
+    donorId: {
+        type: mongoose.Types.ObjectId
     }
 },
     {
