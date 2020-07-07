@@ -69,6 +69,12 @@ const DonorSchema = new mongoose.Schema({
     },
     verificationAttemptedWithCurrentOTP: {
         type: Boolean
+    },
+    numberOfTimesDonated: {
+        type: Number,
+        required: true,
+        min: 0,
+        default: 0
     }
 },
     {

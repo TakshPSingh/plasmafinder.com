@@ -6,6 +6,8 @@ const {generateAndSendOTP} = require('../common/generate_and_send_otp')
 
 const registerDonor = async (donorInfo) => {
     var donor = new Donor(donorInfo)
+    
+    donor.numberOfTimesDonated = 0
     donor.numberOfTimesOTPSent = 0
     donor.verified = false
 
