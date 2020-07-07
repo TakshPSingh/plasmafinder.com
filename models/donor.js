@@ -95,4 +95,12 @@ DonorSchema.statics.findByPhoneNumber = function (phone) {
     return Donor.findOne({ phone })
 }
 
+DonorSchema.statics.findAvailableAndVerfiedDonors = function () {
+    var Donor = this
+    return Donor.find({
+        verified: true,
+        available: true
+    })
+}
+
 export const Donor = mongoose.model('Donor', DonorSchema)

@@ -29,7 +29,7 @@ beforeEach( async () => {
 })
 
 describe('verify donor', () => {
-    jest.setTimeout(15000)
+    jest.setTimeout(20000)
 
     test('invalid phone number', async () => {
         try {
