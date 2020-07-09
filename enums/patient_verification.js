@@ -4,5 +4,4 @@ export const patientVerficationEnums = {
     INCORRECT_OTP_AND_RAN_OUT_OF_CHANCES: 2,
     RAN_OUT_OF_CHANCES: 3,
     ALREADY_VERIFIED: 4,
-    NO_DONOR_AVAILABLE: 5
 }
