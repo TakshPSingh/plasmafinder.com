@@ -71,7 +71,6 @@ describe('patient registration', () => {
             await handlePatientRegistration(patientInfo)
             expect(true).toBe(true)
         } catch (error) {
-            console.log('error: ', error)
             expect(true).toBe(false)
         }
     })
