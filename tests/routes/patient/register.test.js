@@ -17,6 +17,7 @@ describe('patient registration', () => {
             name: 'nhajd',
             age: '22',
             phone: '+919868711873',
+            bloodGroup: 'A',
             email: 'adasdsad',
             location: {
                 latitude: 0,
@@ -38,6 +39,7 @@ describe('patient registration', () => {
             name: 'nhajd',
             age: '22',
             phone: '+11873',
+            bloodGroup: 'A',
             email: 'abcdefgh@gmail.com',
             location: {
                 latitude: 0,
@@ -60,6 +62,7 @@ describe('patient registration', () => {
             age: '22',
             phone: '+919868711873',
             email: 'abcdefgh@gmail.com',
+            bloodGroup: 'A',
             location: {
                 latitude: 0,
                 longitude: 0
@@ -78,6 +81,7 @@ describe('patient registration', () => {
             age: '22',
             phone: '+919868711873',
             email: 'abcdefgh@gmail.com',
+            bloodGroup: 'A',
             location: {
                 latitude: 0,
                 longitude: 0
@@ -103,6 +107,7 @@ describe('patient registration', () => {
             name: 'nhajd',
             age: '22',
             phone: '+919868711873',
+            bloodGroup: 'A',
             email: 'abcdefgh@gmail.com',
             location: {
                 latitude: 0,

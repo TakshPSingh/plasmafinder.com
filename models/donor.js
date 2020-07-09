@@ -20,6 +20,11 @@ const DonorSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    bloodGroup: {
+        type: String,
+        required: true,
+        enum: ['A','B','AB','O']
+    },
     phone: {
         type: String,
         required: true,

@@ -19,6 +19,7 @@ beforeEach( async () => {
         age: '22',
         phone: PATIENT_PHONE_NUMBER,
         email: 'abcdefgh@gmail.com',
+        bloodGroup: 'A',
         location: {
             latitude: 0,
             longitude: 0

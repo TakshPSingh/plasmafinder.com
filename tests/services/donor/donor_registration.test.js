@@ -16,6 +16,7 @@ describe('donor registration', () => {
             name: 'nhajd',
             age: '22',
             medicallyEligible: true,
+            bloodGroup: 'A',
             phone: '+919868711873',
             email: 'adasdsad',
             location: {
@@ -37,6 +38,7 @@ describe('donor registration', () => {
             name: 'nhajd',
             age: '22',
             medicallyEligible: true,
+            bloodGroup: 'A',
             phone: '+11873',
             email: 'abcdefgh@gmail.com',
             location: {
@@ -58,6 +60,7 @@ describe('donor registration', () => {
             name: 'nhajd',
             age: '22',
             medicallyEligible: true,
+            bloodGroup: 'A',
             phone: '+919868711873',
             email: 'abcdefgh@gmail.com',
             location: {
@@ -79,6 +82,7 @@ describe('donor registration', () => {
             name: 'nhajd',
             age: '22',
             medicallyEligible: true,
+            bloodGroup: 'A',
             phone: '+919868711873',
             email: 'abcdefgh@gmail.com',
             location: {
@@ -102,6 +106,7 @@ describe('donor registration', () => {
             name: 'nhajd',
             age: '22',
             medicallyEligible: true,
+            bloodGroup: 'A',
             phone: '+919868711873',
             email: 'abcdefgh@gmail.com',
             location: {

@@ -14,6 +14,11 @@ const PatientSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    bloodGroup: {
+        type: String,
+        required: true,
+        enum: ['A','B','AB','O']
+    },
     phone: {
         type: String,
         required: true,

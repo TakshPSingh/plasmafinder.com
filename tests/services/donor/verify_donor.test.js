@@ -20,6 +20,7 @@ beforeEach( async () => {
         medicallyEligible: true,
         phone: DONOR_PHONE_NUMBER,
         email: 'abcdefgh@gmail.com',
+        bloodGroup: 'A',
         location: {
             latitude: 0,
             longitude: 0
