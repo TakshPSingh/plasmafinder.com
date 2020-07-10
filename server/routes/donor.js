@@ -3,9 +3,11 @@ const _ = require('lodash')
 
 const {handleDonorRegistration} = require('../../services/donor/donor_registration')
 const {verifyDonor} = require('../../services/donor/donor_verification')
+const {handleVerificationCodeGeneration} = require('../../services/donor/verification_codes/verification_code')
 
 const {donorRegistrationEnums} = require('../../enums/donor_registration')
 const {donorVerificationEnums} = require('../../enums/donor_verification')
+const {generateVerificationCodeEnums} = require('../../enums/verification_code')
 
 const router = express.Router()
 
@@ -53,6 +55,29 @@ router.post('/verify', async (request, response) => {
             errorCode = donorVerificationEnums.ALREADY_VERIFIED
         } else {
             errorCode = donorVerificationEnums.UNEXPECTED_ERROR
+        }
+
+        response.status(400).send({ errorCode })
+    }
+})
+
+router.post('/generate-verification-code', async (request, response) => {
+    var body = _.pick(request.body, 'phone')
+
+    try {
+        await handleVerificationCodeGeneration(body.phone)
+        response.status(200).send()
+    } catch (error) {
+        let errorCode
+
+        if (error === generateVerificationCodeEnums.DONOR_NOT_FOUND) {
+            errorCode = generateVerificationCodeEnums.DONOR_NOT_FOUND
+        } else if (error === generateVerificationCodeEnums.NO_PENDING_DONATION_REQUEST_FOUND) {
+            errorCode = generateVerificationCodeEnums.NO_PENDING_DONATION_REQUEST_FOUND
+        } else if (error === generateVerificationCodeEnums.RAN_OUT_OF_CHANCES) {
+            errorCode = generateVerificationCodeEnums.RAN_OUT_OF_CHANCES
+        } else {
+            errorCode = generateVerificationCodeEnums.UNEXPECTED_ERROR
         }
 
         response.status(400).send({ errorCode })
