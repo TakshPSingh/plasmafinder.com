@@ -5,7 +5,7 @@ const {Donor} = require('../../../models/donor')
 const {verifyDonor} = require('../../../services/donor/donor_verification')
 const {handleDonorRegistration} = require('../../../services/donor/donor_registration')
 
-const {donorVerficationEnums} = require('../../../enums/donor_verification')
+const {donorVerificationEnums} = require('../../../enums/donor_verification')
 
 const {MAX_NUMBER_OF_OTP_VERIFICATIONS_ALLOWED} = require('../../../constants/otp')
 
@@ -37,7 +37,7 @@ describe('verify donor', () => {
             await verifyDonor('1',2)
             throw 'verifyDonor did not throw anything'
         } catch (error) {
-            expect(error).toBe(donorVerficationEnums.DONOR_NOT_FOUND)
+            expect(error).toBe(donorVerificationEnums.DONOR_NOT_FOUND)
         }
     })
 
@@ -49,7 +49,7 @@ describe('verify donor', () => {
             await verifyDonor(DONOR_PHONE_NUMBER, donor.otp)
             throw 'verifyDonor did not throw anything'
         } catch (error) {
-            expect(error).toBe(donorVerficationEnums.ALREADY_VERIFIED)
+            expect(error).toBe(donorVerificationEnums.ALREADY_VERIFIED)
         }
     })
 
@@ -68,7 +68,7 @@ describe('verify donor', () => {
             await verifyDonor(DONOR_PHONE_NUMBER, donor.otp + 1)
             throw 'verifyDonor did not throw anything'
         } catch (error) {
-            expect(error).toBe(donorVerficationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
+            expect(error).toBe(donorVerificationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
         }
     })
 
@@ -80,7 +80,7 @@ describe('verify donor', () => {
                 await verifyDonor(DONOR_PHONE_NUMBER, donor.otp + 1)
                 throw 'verifyDonor did not throw anything'
             } catch (error) {
-                expect(error).toBe(donorVerficationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
+                expect(error).toBe(donorVerificationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
             }
         }
 
@@ -90,7 +90,7 @@ describe('verify donor', () => {
             await verifyDonor(DONOR_PHONE_NUMBER, donor.otp + 1)
             throw 'verifyDonor did not throw anything'
         } catch (error) {
-            expect(error).toBe(donorVerficationEnums.RAN_OUT_OF_CHANCES)
+            expect(error).toBe(donorVerificationEnums.RAN_OUT_OF_CHANCES)
         }
     })
 
@@ -102,7 +102,7 @@ describe('verify donor', () => {
                 await verifyDonor(DONOR_PHONE_NUMBER, donor.otp + 1)
                 throw 'verifyDonor did not throw anything'
             } catch (error) {
-                expect(error).toBe(donorVerficationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
+                expect(error).toBe(donorVerificationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
             }
         }
 
@@ -112,7 +112,7 @@ describe('verify donor', () => {
             await verifyDonor(DONOR_PHONE_NUMBER, donor.otp + 1)
             throw 'verifyDonor did not throw anything'
         } catch (error) {
-            expect(error).toBe(donorVerficationEnums.RAN_OUT_OF_CHANCES)
+            expect(error).toBe(donorVerificationEnums.RAN_OUT_OF_CHANCES)
         }
 
         donor = await Donor.findByPhoneNumber(DONOR_PHONE_NUMBER)
@@ -121,7 +121,7 @@ describe('verify donor', () => {
             await verifyDonor(DONOR_PHONE_NUMBER, donor.otp)
             throw 'verifyDonor did not throw anything'
         } catch (error) {
-            expect(error).toBe(donorVerficationEnums.RAN_OUT_OF_CHANCES)
+            expect(error).toBe(donorVerificationEnums.RAN_OUT_OF_CHANCES)
         }
     })
 })
