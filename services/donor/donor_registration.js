@@ -17,6 +17,10 @@ const registerDonor = async (donorInfo) => {
     delete donor.completedDonations
     delete donor.cancelledDonations
 
+    delete donor.verificationCode
+    delete donor.verificationAttemptedWithCurrentVerificationCode
+    delete donor.numberOfTimesVerificationCodeSent
+
     var donorValidationError = donor.validateSync()
     if (donorValidationError || !donor.medicallyEligible) {
         throw donorRegistrationEnums.VALIDATION_ERROR

@@ -95,6 +95,20 @@ const DonorSchema = new mongoose.Schema({
         default: 0,
         min: 0
     },
+    verificationCode: {
+        type: Number,
+        min: 0,
+        max: 999999
+    },
+    verificationAttemptedWithCurrentVerificationCode: {
+        type: Boolean
+    },
+    numberOfTimesVerificationCodeSent: {
+        type: Number,
+        min: 0,
+        default: 0,
+        required: true
+    },
     completedDonations: [
         {
             patientId: {
