@@ -19,7 +19,8 @@ const registerDonor = async (donorInfo) => {
 
     delete donor.verificationCode
     delete donor.verificationAttemptedWithCurrentVerificationCode
-    delete donor.numberOfTimesVerificationCodeSent
+    
+    donor.numberOfTimesVerificationCodeSent = 0
 
     var donorValidationError = donor.validateSync()
     if (donorValidationError || !donor.medicallyEligible) {
