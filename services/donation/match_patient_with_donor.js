@@ -89,3 +89,14 @@ export const matchPatientWithDonor = async (patient) => {
         }
     }
 }
+
+export const handleDonorMatching = async (patient) => {
+    try {
+        var {patient, assignedDonor}  = await matchPatientWithDonor(patient)
+
+    } catch (error) {
+        if (error === patientMatchingEnums.NO_DONOR_AVAILABLE) {
+
+        }
+    }
+}

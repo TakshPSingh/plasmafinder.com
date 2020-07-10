@@ -1,5 +1,5 @@
 const {generateOTP} = require('./generate_otp')
-const {sendOTP} = require('../sms/send_otp')
+const {sendOTP} = require('../sms/otp/send_otp')
 
 export const generateAndSendOTP = async (user) => {
     var otp = await generateOTP()
