@@ -14,6 +14,8 @@ const registerDonor = async (donorInfo) => {
     donor.callsLeft = 0
 
     delete donor.patientId
+    delete donor.completedDonations
+    delete donor.cancelledDonations
 
     var donorValidationError = donor.validateSync()
     if (donorValidationError || !donor.medicallyEligible) {

@@ -94,7 +94,31 @@ const DonorSchema = new mongoose.Schema({
         required: true,
         default: 0,
         min: 0
-    }
+    },
+    completedDonations: [
+        {
+            patientId: {
+                type: mongoose.Types.ObjectId,
+                required: true
+            },
+            completedAt: {
+                type: Number,
+                required: true
+            }
+        }
+    ],
+    cancelledDonations: [
+        {
+            patientId: {
+                type: mongoose.Types.ObjectId,
+                required: true
+            },
+            cancelledAt: {
+                type: Number,
+                required: true
+            }
+        }
+    ]
 },
     {
         timestamps: {
