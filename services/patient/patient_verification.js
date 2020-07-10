@@ -20,7 +20,7 @@ const handleVerificationCaseWhenOTPIncorrect = async (patient, phone, otp) => {
 const handleCaseWhenOTPCorrectInFirstAttempt = async (patient) => {
     patient.verificationAttemptedWithCurrentOTP = true
     patient.verified = true
-    await patient.save()
+    return await patient.save()
 }
 
 export const verifyPatient = async (phone, otp) => {
@@ -31,7 +31,7 @@ export const verifyPatient = async (phone, otp) => {
     } else if (patient.verified) {
         throw patientVerificationEnums.ALREADY_VERIFIED
     } else if (patient.otp === otp && !patient.verificationAttemptedWithCurrentOTP) {
-        await handleCaseWhenOTPCorrectInFirstAttempt(patient)
+        return await handleCaseWhenOTPCorrectInFirstAttempt(patient)
     } else if (patient.otp === otp && patient.verificationAttemptedWithCurrentOTP) {
         throw patientVerificationEnums.RAN_OUT_OF_CHANCES
         // since if verification already attempted, then MAX_NUMBER_OF_OTP_VERIFICATIONS_ALLOWED must have been reached
