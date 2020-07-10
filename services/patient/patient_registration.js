@@ -6,8 +6,10 @@ const {patientRegistrationEnums} = require('../../enums/patient_registration')
 
 const registerPatient = async (patientInfo) => {
     var patient = new Patient(patientInfo)
+    
     patient.numberOfTimesOTPSent = 0
     patient.verified = false
+    patient.callsLeft = 0
 
     delete patient.donorId
 

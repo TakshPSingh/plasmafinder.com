@@ -6,6 +6,7 @@ const {patientMatchingEnums} = require('../../enums/patient_matching')
 
 const {DONATION_RANGE_IN_KILOMETERS} = require('../../constants/donation')
 const {COMPATIBLE_BLOOD_GROUPS_FOR_PATIENT} = require('../../constants/plasma_compatibility')
+const {MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_PATIENT, MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR} = require('../../constants/calls')
 
 const {notifyPatientAndDonorOfMatch, notifyPatientOfUnsuccessfulMatch} = require('../sms/notifications/match')
 
@@ -79,6 +80,9 @@ export const matchPatientWithDonor = async (patient) => {
     } else {
         patient.donorId = optimalDonor._id
         optimalDonor.patientId = patient._id
+
+        patient.callsLeft = MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_PATIENT
+        optimalDonor.callsLeft = MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR
 
         optimalDonor.available = false
 

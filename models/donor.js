@@ -88,6 +88,12 @@ const DonorSchema = new mongoose.Schema({
     },
     patientId: {
         type: mongoose.Types.ObjectId
+    },
+    callsLeft: {
+        type: Number,
+        required: true,
+        default: 0,
+        min: 0
     }
 },
     {

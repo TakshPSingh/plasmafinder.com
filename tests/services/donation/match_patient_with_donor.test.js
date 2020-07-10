@@ -14,6 +14,8 @@ const {patientVerificationEnums} = require('../../../enums/patient_verification'
 const {patientMatchingEnums} = require('../../../enums/patient_matching')
 const {donorEnums} = require('../../../enums/donor')
 
+const {MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_PATIENT, MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR} = require('../../../constants/calls')
+
 const PATIENT_PHONE_NUMBER = '+919868711873'
 const DONOR_PHONE_NUMBER = '+919910166009'
 const DONOR_TWO_PHONE_NUMBER = '+919716610606'
@@ -221,6 +223,9 @@ describe('match patient with donor', () => {
         expect(assignedDonor.patientId).toStrictEqual(patient._id)
         expect(patient.donorId).toStrictEqual(assignedDonor._id)
         expect(assignedDonor.available).toBe(false)
+
+        expect(patient.callsLeft).toBe(MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_PATIENT)
+        expect(assignedDonor.callsLeft).toBe(MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR)
     })
 
     test('Multiple compatible donors - algorithm expected to choose donor by location', async () => {
@@ -284,6 +289,9 @@ describe('match patient with donor', () => {
 
         var donorTwo = await Donor.findByPhoneNumber(DONOR_TWO_PHONE_NUMBER)
         expect(assignedDonor._id).toStrictEqual(donorTwo._id)
+
+        expect(patient.callsLeft).toBe(MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_PATIENT)
+        expect(assignedDonor.callsLeft).toBe(MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR)
     })
 
     test('Multiple compatible donors - algorithm expected to choose donor by numberOfTimesDonated', async () => {
@@ -351,5 +359,8 @@ describe('match patient with donor', () => {
 
         var donorOne = await Donor.findByPhoneNumber(DONOR_PHONE_NUMBER)
         expect(assignedDonor._id).toStrictEqual(donorOne._id)
+
+        expect(patient.callsLeft).toBe(MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_PATIENT)
+        expect(assignedDonor.callsLeft).toBe(MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR)
     })
 })

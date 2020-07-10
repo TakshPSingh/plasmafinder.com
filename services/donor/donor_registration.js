@@ -11,6 +11,7 @@ const registerDonor = async (donorInfo) => {
     donor.numberOfTimesOTPSent = 0
     donor.available = false
     donor.verified = false
+    donor.callsLeft = 0
 
     delete donor.patientId
 
