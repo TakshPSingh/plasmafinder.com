@@ -7,6 +7,8 @@ const {patientMatchingEnums} = require('../../enums/patient_matching')
 const {DONATION_RANGE_IN_KILOMETERS} = require('../../constants/donation')
 const {COMPATIBLE_BLOOD_GROUPS_FOR_PATIENT} = require('../../constants/plasma_compatibility')
 
+const {notifyPatientAndDonorOfMatch, notifyPatientOfUnsuccessfulMatch} = require('../sms/notifications/match')
+
 const findDonorsWithCompatibleBloodGroup = (patient, availableDonors) => {
     var donorsWithCompatibleBloodGroup = []
     var patientBloodGroup = patient.bloodGroup
@@ -93,10 +95,10 @@ export const matchPatientWithDonor = async (patient) => {
 export const handleDonorMatching = async (patient) => {
     try {
         var {patient, assignedDonor}  = await matchPatientWithDonor(patient)
-
+        await notifyPatientAndDonorOfMatch(patient.phone, assignedDonor.phone)
     } catch (error) {
         if (error === patientMatchingEnums.NO_DONOR_AVAILABLE) {
-
+            await notifyPatientOfUnsuccessfulMatch(patient.phone)
         }
     }
 }

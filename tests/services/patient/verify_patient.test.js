@@ -5,7 +5,7 @@ const {Patient} = require('../../../models/patient')
 const {verifyPatient} = require('../../../services/patient/patient_verification')
 const {handlePatientRegistration} = require('../../../services/patient/patient_registration')
 
-const {patientVerficationEnums} = require('../../../enums/patient_verification')
+const {patientVerificationEnums} = require('../../../enums/patient_verification')
 
 const {MAX_NUMBER_OF_OTP_VERIFICATIONS_ALLOWED} = require('../../../constants/otp')
 
@@ -36,7 +36,7 @@ describe('verify patient', () => {
             await verifyPatient('1',2)
             throw 'verifyPatient did not throw anything'
         } catch (error) {
-            expect(error).toBe(patientVerficationEnums.PATIENT_NOT_FOUND)
+            expect(error).toBe(patientVerificationEnums.PATIENT_NOT_FOUND)
         }
     })
 
@@ -48,7 +48,7 @@ describe('verify patient', () => {
             await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp)
             throw 'verifyPatient did not throw anything'
         } catch (error) {
-            expect(error).toBe(patientVerficationEnums.ALREADY_VERIFIED)
+            expect(error).toBe(patientVerificationEnums.ALREADY_VERIFIED)
         }
     })
 
@@ -67,7 +67,7 @@ describe('verify patient', () => {
             await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp + 1)
             throw 'verifyPatient did not throw anything'
         } catch (error) {
-            expect(error).toBe(patientVerficationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
+            expect(error).toBe(patientVerificationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
         }
     })
 
@@ -79,7 +79,7 @@ describe('verify patient', () => {
                 await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp + 1)
                 throw 'verifyPatient did not throw anything'
             } catch (error) {
-                expect(error).toBe(patientVerficationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
+                expect(error).toBe(patientVerificationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
             }
         }
 
@@ -89,7 +89,7 @@ describe('verify patient', () => {
             await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp + 1)
             throw 'verifyPatient did not throw anything'
         } catch (error) {
-            expect(error).toBe(patientVerficationEnums.RAN_OUT_OF_CHANCES)
+            expect(error).toBe(patientVerificationEnums.RAN_OUT_OF_CHANCES)
         }
     })
 
@@ -101,7 +101,7 @@ describe('verify patient', () => {
                 await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp + 1)
                 throw 'verifyPatient did not throw anything'
             } catch (error) {
-                expect(error).toBe(patientVerficationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
+                expect(error).toBe(patientVerificationEnums.INCORRECT_OTP_ANOTHER_ONE_SENT)
             }
         }
 
@@ -111,7 +111,7 @@ describe('verify patient', () => {
             await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp + 1)
             throw 'verifyPatient did not throw anything'
         } catch (error) {
-            expect(error).toBe(patientVerficationEnums.RAN_OUT_OF_CHANCES)
+            expect(error).toBe(patientVerificationEnums.RAN_OUT_OF_CHANCES)
         }
 
         patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
@@ -120,7 +120,7 @@ describe('verify patient', () => {
             await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp)
             throw 'verifyPatient did not throw anything'
         } catch (error) {
-            expect(error).toBe(patientVerficationEnums.RAN_OUT_OF_CHANCES)
+            expect(error).toBe(patientVerificationEnums.RAN_OUT_OF_CHANCES)
         }
     })
 })

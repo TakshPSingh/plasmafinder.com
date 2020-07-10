@@ -10,9 +10,9 @@ const {verifyPatient} = require('../../../services/patient/patient_verification'
 const {matchPatientWithDonor} = require('../../../services/donation/match_patient_with_donor')
 
 const {donorRegistrationEnums} = require('../../../enums/donor_registration')
-const {patientVerificationEnums, patientVerficationEnums} = require('../../../enums/patient_verification')
+const {patientVerificationEnums} = require('../../../enums/patient_verification')
 const {patientMatchingEnums} = require('../../../enums/patient_matching')
-const { donorEnums } = require('../../../enums/donor')
+const {donorEnums} = require('../../../enums/donor')
 
 const PATIENT_PHONE_NUMBER = '+919868711873'
 const DONOR_PHONE_NUMBER = '+919910166009'

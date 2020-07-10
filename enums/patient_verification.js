@@ -1,4 +1,4 @@
-export const patientVerficationEnums = {
+export const patientVerificationEnums = {
     PATIENT_NOT_FOUND: 0,
     INCORRECT_OTP_ANOTHER_ONE_SENT: 1,
     INCORRECT_OTP_AND_RAN_OUT_OF_CHANCES: 2,
