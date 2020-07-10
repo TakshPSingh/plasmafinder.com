@@ -83,6 +83,9 @@ export const matchPatientWithDonor = async (patient) => {
         await patient.save()
         await optimalDonor.save()
         
-        return optimalDonor
+        return {
+            patient,
+            assignedDonor: optimalDonor
+        }
     }
 }

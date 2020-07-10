@@ -214,9 +214,9 @@ describe('match patient with donor', () => {
         var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
         await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp)
 
-        var assignedDonor = await matchPatientWithDonor(patient)
+        var {patient, assignedDonor} = await matchPatientWithDonor(patient)
         
-        var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
+        expect(patient.phone).toBe(PATIENT_PHONE_NUMBER)
 
         expect(assignedDonor.patientId).toStrictEqual(patient._id)
         expect(patient.donorId).toStrictEqual(assignedDonor._id)
@@ -274,9 +274,9 @@ describe('match patient with donor', () => {
         var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
         await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp)
 
-        var assignedDonor = await matchPatientWithDonor(patient)
+        var {patient, assignedDonor} = await matchPatientWithDonor(patient)
         
-        var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
+        expect(patient.phone).toBe(PATIENT_PHONE_NUMBER)
 
         expect(assignedDonor.patientId).toStrictEqual(patient._id)
         expect(patient.donorId).toStrictEqual(assignedDonor._id)
@@ -341,9 +341,9 @@ describe('match patient with donor', () => {
         var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
         await verifyPatient(PATIENT_PHONE_NUMBER, patient.otp)
 
-        var assignedDonor = await matchPatientWithDonor(patient)
+        var {patient, assignedDonor} = await matchPatientWithDonor(patient)
         
-        var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
+        expect(patient.phone).toBe(PATIENT_PHONE_NUMBER)
 
         expect(assignedDonor.patientId).toStrictEqual(patient._id)
         expect(patient.donorId).toStrictEqual(assignedDonor._id)
