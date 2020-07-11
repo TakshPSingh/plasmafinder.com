@@ -4,10 +4,12 @@ const _ = require('lodash')
 const {handleDonorRegistration} = require('../../services/donor/donor_registration')
 const {verifyDonor} = require('../../services/donor/donor_verification')
 const {handleVerificationCodeGeneration} = require('../../services/donor/verification_codes/verification_code')
+const {handleRequestToCompleteDonation} = require('../../services/donation/donation_completion')
 
 const {donorRegistrationEnums} = require('../../enums/donor_registration')
 const {donorVerificationEnums} = require('../../enums/donor_verification')
 const {generateVerificationCodeEnums} = require('../../enums/verification_code')
+const {donationCompletionEnums} = require('../../enums/donation_completion')
 
 const router = express.Router()
 
@@ -78,6 +80,33 @@ router.post('/generate-verification-code', async (request, response) => {
             errorCode = generateVerificationCodeEnums.RAN_OUT_OF_CHANCES
         } else {
             errorCode = generateVerificationCodeEnums.UNEXPECTED_ERROR
+        }
+
+        response.status(400).send({ errorCode })
+    }
+})
+
+router.post('/complete-donation', async (request, response) => {
+    var body = _.pick(request.body, ['phone', 'verificationCode'])
+
+    try {
+        await handleRequestToCompleteDonation(body.phone, body.verificationCode)
+        response.status(200).send()
+    } catch (error) {
+        let errorCode
+
+        if (error === donationCompletionEnums.DONOR_NOT_FOUND) {
+            errorCode = donationCompletionEnums.DONOR_NOT_FOUND
+        } else if (error === donationCompletionEnums.INCORRECT_VERIFICATION_CODE_ANOTHER_ONE_SENT) {
+            errorCode = donationCompletionEnums.INCORRECT_VERIFICATION_CODE_ANOTHER_ONE_SENT
+        } else if (error === donationCompletionEnums.INCORRECT_VERIFICATION_CODE_AND_RAN_OUT_OF_CHANCES) {
+            errorCode = donationCompletionEnums.INCORRECT_VERIFICATION_CODE_AND_RAN_OUT_OF_CHANCES
+        } else if (error === donationCompletionEnums.RAN_OUT_OF_CHANCES) {
+            errorCode = donationCompletionEnums.RAN_OUT_OF_CHANCES
+        } else if (error === donationCompletionEnums.NO_PENDING_DONATION_REQUEST_FOUND) {
+            errorCode = donationCompletionEnums.NO_PENDING_DONATION_REQUEST_FOUND
+        } else {
+            errorCode = UNEXPECTED_ERROR
         }
 
         response.status(400).send({ errorCode })
