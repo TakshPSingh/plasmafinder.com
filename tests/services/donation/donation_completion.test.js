@@ -197,6 +197,11 @@ describe('donation completion', () => {
         donor = await Donor.findByPhoneNumber(DONOR_ONE_PHONE_NUMBER)
 
         checkIfDonorReset(donor)
+
+        expect(donor.numberOfTimesDonated).toBe(1)
+        expect(donor.completedDonations).toHaveLength(1)
+        expect(donor.completedDonations[0].patientId).toStrictEqual(patient._id)
+        expect(donor.completedDonations[0].completedAt).toBeLessThan(new Date().getTime())
     })
 
     test('run out of chances', async () => {
