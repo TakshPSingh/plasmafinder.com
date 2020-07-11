@@ -19,6 +19,7 @@ const PATIENT_ONE_PHONE_NUMBER = '+919716610606'
 
 beforeEach( async () => {
     await Donor.deleteMany()
+    await Patient.deleteMany()
 })
 
 describe('generate verfication code', () => {
