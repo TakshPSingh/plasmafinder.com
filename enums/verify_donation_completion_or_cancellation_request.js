@@ -1,0 +1,5 @@
+export const verifyDonationCompletionOrCancellationRequestEnums = {
+    INCORRECT_VERIFICATION_CODE_ANOTHER_ONE_SENT: 0,
+    INCORRECT_VERIFICATION_CODE_AND_RAN_OUT_OF_CHANCES: 1,
+    RAN_OUT_OF_CHANCES: 2
+}
