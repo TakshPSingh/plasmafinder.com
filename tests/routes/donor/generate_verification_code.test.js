@@ -4,16 +4,24 @@ const {app} = require('../../../server/app')
 const {mongoose} = require('../../../db/mongoose_connect')
 
 const {Donor} = require('../../../models/donor')
+const {Patient} = require('../../../models/patient')
+
+const {handleDonorRegistration} = require('../../../services/donor/donor_registration')
+const {verifyDonor} = require('../../../services/donor/donor_verification')
+const {handlePatientRegistration} = require('../../../services/patient/patient_registration')
+const {verifyPatient} = require('../../../services/patient/patient_verification')
+const {matchPatientWithDonor} = require('../../../services/donation/match_patient_with_donor')
 
 const {generateVerificationCodeEnums} = require('../../../enums/verification_code')
 
 const DONOR_ONE_PHONE_NUMBER = '+919868711873'
+const PATIENT_ONE_PHONE_NUMBER = '+919716610606'
 
 beforeEach( async () => {
     await Donor.deleteMany()
 })
 
-descibe('generate verfication code', () => {
+describe('generate verfication code', () => {
     test('invalid donor', async () => {
         await request(app)
         .post('/api/donor/generate-verification-code')
