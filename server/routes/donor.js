@@ -6,6 +6,7 @@ const {verifyDonor} = require('../../services/donor/donor_verification')
 const {handleVerificationCodeGeneration} = require('../../services/donor/verification_codes/verification_code')
 const {handleRequestToCompleteDonation} = require('../../services/donation/donation_completion')
 const {handleRequestToCancelDonation} = require('../../services/donation/donation_cancellation')
+const {handleDonorMatching} = require('../../services/donation/match_patient_with_donor')
 
 const {donorRegistrationEnums} = require('../../enums/donor_registration')
 const {donorVerificationEnums} = require('../../enums/donor_verification')
@@ -119,8 +120,9 @@ router.post('/cancel-donation', async (request, response) => {
     var body = _.pick(request.body, ['phone', 'verificationCode'])
 
     try {
-        await handleRequestToCancelDonation(body.phone, body.verificationCode)
+        var patient = await handleRequestToCancelDonation(body.phone, body.verificationCode)
         response.status(200).send()
+        await handleDonorMatching(patient)
     } catch (error) {
         let errorCode
 

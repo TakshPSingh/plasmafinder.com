@@ -18,12 +18,14 @@ const cancelDonationAfterVerification = async (donor) => {
     })
     resetDonorAfterDonationCancelledOrCompleted(donor)
     await donor.save()
+
+    return patient
 }
 
 const cancelDonation = async (donor, verificationCode) => {
     try {
         await verifyDonationCompletionOrCancellationRequest(donor, verificationCode)
-        await cancelDonationAfterVerification(donor)
+        return cancelDonationAfterVerification(donor)
     } catch (error) {
         if (error === verifyDonationCompletionOrCancellationRequestEnums.INCORRECT_VERIFICATION_CODE_ANOTHER_ONE_SENT) {
             throw donationCancellationEnums.INCORRECT_VERIFICATION_CODE_ANOTHER_ONE_SENT
@@ -39,7 +41,7 @@ const cancelDonation = async (donor, verificationCode) => {
 
 const handleRequestToCancelDonationWhenDonorFound = async (donor, verificationCode) => {
     if (donor.patientId) {
-        await cancelDonation(donor, verificationCode)
+        return cancelDonation(donor, verificationCode)
     } else {
         throw donationCancellationEnums.NO_PENDING_DONATION_REQUEST_FOUND
     }
@@ -49,7 +51,7 @@ export const handleRequestToCancelDonation = async (phone, verificationCode) => 
     var donor = await Donor.findByPhoneNumber(phone)
 
     if (donor) {
-        await handleRequestToCancelDonationWhenDonorFound(donor, verificationCode)
+        return handleRequestToCancelDonationWhenDonorFound(donor, verificationCode)
     } else {
         throw donationCancellationEnums.DONOR_NOT_FOUND
     }
