@@ -202,6 +202,10 @@ describe('donation completion', () => {
         expect(donor.completedDonations).toHaveLength(1)
         expect(donor.completedDonations[0].patientId).toStrictEqual(patient._id)
         expect(donor.completedDonations[0].completedAt).toBeLessThan(new Date().getTime())
+    
+        var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
+
+        expect(patient.donorId).toBeUndefined()
     })
 
     test('run out of chances', async () => {
