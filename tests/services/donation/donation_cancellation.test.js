@@ -202,6 +202,10 @@ describe('donation canellation', () => {
         expect(donor.cancelledDonations).toHaveLength(1)
         expect(donor.cancelledDonations[0].patientId).toStrictEqual(patient._id)
         expect(donor.cancelledDonations[0].cancelledAt).toBeLessThan(new Date().getTime())
+    
+        var patient = await Patient.findByPhoneNumber(PATIENT_PHONE_NUMBER)
+
+        expect(patient.donorId).toBeUndefined()
     })
 
     test('run out of chances', async () => {

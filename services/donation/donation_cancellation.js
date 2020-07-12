@@ -1,4 +1,5 @@
 const {Donor} = require('../../models/donor')
+const {Patient} = require('../../models/patient')
 
 const {verifyDonationCompletionOrCancellationRequest} = require('../donor/verify_donation_cancellation_or_completion_request')
 const {resetDonorAfterDonationCancelledOrCompleted} = require('../donor/donor_reset_after_donation_cancelled_or_completed')
@@ -7,6 +8,10 @@ const {donationCancellationEnums} = require('../../enums/donation_cancellation')
 const {verifyDonationCompletionOrCancellationRequestEnums} = require('../../enums/verify_donation_completion_or_cancellation_request')
 
 const cancelDonationAfterVerification = async (donor) => {
+    var patient = await Patient.findById(donor.patientId)
+    patient.donorId = undefined
+    await patient.save()
+
     donor.cancelledDonations.push({
         patientId: donor.patientId,
         cancelledAt: new Date().getTime()
