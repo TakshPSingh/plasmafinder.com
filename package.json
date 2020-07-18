@@ -4,13 +4,14 @@
   "description": "A service to match COVID-19 patient with plasma donors",
   "main": "server/app.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon server/server.js",
+    "start": "node -r esm server/server.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon -r esm server/server.js",
     "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
   },
   "author": "TakshPSingh",
   "license": "UNLICENSED",
   "dependencies": {
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.21",
