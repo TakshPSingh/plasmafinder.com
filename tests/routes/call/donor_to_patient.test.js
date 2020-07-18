@@ -11,7 +11,6 @@ const {handlePatientRegistration} = require('../../../services/patient/patient_r
 const {verifyDonor} = require('../../../services/donor/donor_verification')
 const {verifyPatient} = require('../../../services/patient/patient_verification')
 const {matchPatientWithDonor} = require('../../../services/donation/match_patient_with_donor')
-const {handleCallRequestFromDonor} = require('../../../services/call/call_from_donor')
 
 const {MAX_DURATION_OF_CALL_BY_DONOR} = require('../../../constants/calls')
 
