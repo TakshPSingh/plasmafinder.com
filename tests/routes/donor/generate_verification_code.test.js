@@ -23,6 +23,7 @@ beforeEach( async () => {
 })
 
 describe('generate verfication code', () => {
+    jest.setTimeout(15000)
     test('invalid donor', async () => {
         await request(app)
         .post('/api/donor/generate-verification-code')
