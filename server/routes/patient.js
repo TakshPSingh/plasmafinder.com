@@ -25,6 +25,8 @@ router.post('/register', async (request, response) => {
             errorCode = patientRegistrationEnums.ALREADY_REGISTERED_BUT_PENDING_VERIFICATION
         } else if (error === patientRegistrationEnums.ALREADY_REGISTERED_AND_VERIFIED) {
             errorCode = patientRegistrationEnums.ALREADY_REGISTERED_AND_VERIFIED
+        } else {
+            errorCode = patientRegistrationEnums.UNEXPECTED_ERROR   
         }
 
         response.status(400).send({ errorCode })
