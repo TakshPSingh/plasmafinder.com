@@ -9,5 +9,5 @@ export const generateAndSendVerificationCode = async (donor) => {
     donor.numberOfTimesVerificationCodeSent++
 
     await donor.save()
-    await sendVerificationCode(donor.phone, verificationCode)
+    await sendVerificationCode(donor.phone, donor.verificationCode)
 }

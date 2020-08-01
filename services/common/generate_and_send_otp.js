@@ -9,5 +9,5 @@ export const generateAndSendOTP = async (user) => {
     user.numberOfTimesOTPSent++
     await user.save()
 
-    await sendOTP(user.phone, otp)
+    await sendOTP(user.phone, user.otp)
 }
