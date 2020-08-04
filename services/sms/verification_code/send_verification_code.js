@@ -5,7 +5,7 @@ const client = require('twilio')(accountSid, authToken)
 
 export const sendVerificationCode = async (phone, verificationCode) => {
     await client.messages.create({
-        body: `Dear Donor, your verification code for plasmafinder.com is ${verificationCode}`,
+        body: `Your verification code for plasmafinder.com is ${verificationCode}`,
         from: process.env.TWILIO_PHONE_NUMBER,
         to: phone
     })
