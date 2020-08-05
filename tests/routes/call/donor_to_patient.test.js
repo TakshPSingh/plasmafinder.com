@@ -34,12 +34,7 @@ describe('Route: /api/call/donor', () => {
         await request(app)
         .get(`/api/call/donor/${process.env.CALL_API_KEY}`)
         .send()
-        .expect(200)
-        .then((response) => {
-            expect(response.body.destination.numbers).toHaveLength(1)
-            expect(response.body.destination.numbers[0]).toBeNull()
-            expect(response.body.max_conversation_duration).toBe(MAX_DURATION_OF_CALL_BY_DONOR)
-        })
+        .expect(400)
     })
 
     test('valid donor assigned to patient', async () => {
@@ -79,14 +74,12 @@ describe('Route: /api/call/donor', () => {
 
         await request(app)
         .get(`/api/call/donor/${process.env.CALL_API_KEY}`)
-        .send({
-            From: donor.phone
+        .query({
+            From: '0' + donor.phone.substring(3)
         })
         .expect(200)
         .then((response) => {
-            expect(response.body.destination.numbers).toHaveLength(1)
-            expect(response.body.destination.numbers[0]).toBe(patient.phone)
-            expect(response.body.max_conversation_duration).toBe(MAX_DURATION_OF_CALL_BY_DONOR)
+            expect(response.text).toBe(patient.phone)
         })
     })
 })
