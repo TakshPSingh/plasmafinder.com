@@ -17,7 +17,7 @@ const notifyPatientOfMatch = (patientPhone) => {
 const notifyDonorOfMatch = (donorPhone) => {
     const callDurationLimitInMinutes = MAX_DURATION_OF_CALL_BY_DONOR / 60
     return client.messages.create({
-        body: `Hope you're having a great day! You have been matched with a patient.\nPlease call ${process.env.PHONE_NUMBER_FOR_DONORS_TO_CALL} to talk to them.\nYou can call this number upto ${MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR} times and each call can last upto ${callDurationLimitInMinutes} mins. And as soon as you start trusting the patient, please ask them to share their phone number and contact them directly after that.\nAnd please visit http://www.plasmafinder.com/inform to inform us after you have completed this request or to cancel it. Please make sure that you do this since this will help us update our records and help us requests in the future accordingly\nSincerely,\nplasmafinder.com`,
+        body: `Dear Plasma Donor,\nHope you're having a great day! You've been matched with a patient.\nPlease call ${process.env.PHONE_NUMBER_FOR_DONORS_TO_CALL} to talk to them. You can call this number upto ${MAX_NUMBER_OF_CALLS_ALLOWED_PER_DONATION_BY_DONOR} times and each call can last upto ${callDurationLimitInMinutes} mins. And as soon as you start trusting the patient, please ask them to share their phone number and contact them directly after that.\nAnd please visit http://www.plasmafinder.com/inform to inform us after you have completed this request or to cancel it. Please make sure that you do this since this will help us update our records and help us requests in the future accordingly\nSincerely,\nplasmafinder.com`,
         from: process.env.TWILIO_PHONE_NUMBER,
         to: donorPhone
     })
