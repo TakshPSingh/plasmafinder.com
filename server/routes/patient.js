@@ -10,6 +10,8 @@ const {patientVerificationEnums} = require('../../enums/patient_verification')
 
 const router = express.Router()
 
+router.use(express.json())
+
 router.post('/register', async (request, response) => {
     var body = _.pick(request.body, 'patientInfo')
 

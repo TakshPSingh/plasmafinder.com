@@ -17,6 +17,8 @@ const {donationCancellationEnums} = require('../../enums/donation_cancellation')
 
 const router = express.Router()
 
+router.use(express.json())
+
 router.post('/register', async (request, response) => {
     var body = _.pick(request.body, 'donorInfo')
 

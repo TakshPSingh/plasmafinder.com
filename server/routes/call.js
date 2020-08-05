@@ -12,34 +12,26 @@ const {MAX_DURATION_OF_CALL_BY_DONOR} = require('../../constants/calls')
 const {MAX_DURATION_OF_CALL_BY_PATIENT} = require('../../constants/calls')
 
 router.get('/donor/:apiKey', authenticateCall, async (request, response) => {
-    var body = _.pick(request.body, 'From')
+    var body = _.pick(request.query, 'From')
 
     try {
-        var patientPhoneNumber = await handleCallRequestFromDonor(body.From)
-        response.status(200).send({
-            destination: {
-                numbers: [patientPhoneNumber]
-            },
-            max_conversation_duration: MAX_DURATION_OF_CALL_BY_DONOR
-        })
+        var dialerPhoneNumber = '+91' + body.From.substring(1)
+        var patientPhoneNumber = await handleCallRequestFromDonor(dialerPhoneNumber)
+        response.status(200).send(patientPhoneNumber)
     } catch (error) {
-        response.status(500).send()
+        response.status(400).send()
     }
 })
 
 router.get('/patient/:apiKey', authenticateCall, async (request, response) => {
-    var body = _.pick(request.body, 'From')
+    var body = _.pick(request.query, 'From')
 
     try {
-        var donorPhoneNumber = await handleCallRequestFromPatient(body.From)
-        response.status(200).send({
-            destination: {
-                numbers: [donorPhoneNumber]
-            },
-            max_conversation_duration: MAX_DURATION_OF_CALL_BY_PATIENT
-        })
+        var dialerPhoneNumber = '+91' + body.From.substring(1)
+        var donorPhoneNumber = await handleCallRequestFromPatient(dialerPhoneNumber)
+        response.status(200).send(donorPhoneNumber)
     } catch (error) {
-        response.status(500).send()
+        response.status(400).send()
     }
 })
 
